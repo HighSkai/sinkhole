@@ -1,0 +1,119 @@
+/* Svelte Flow overrides + shared node styles (pipeline chunk only). */
+
+.sinkhole-flow {
+  --xy-background-color: #111113;
+  --xy-edge-stroke: rgb(255 255 255 / 0.18);
+  background: #111113;
+}
+.sinkhole-flow .svelte-flow__pane {
+  cursor: default;
+}
+.sinkhole-flow .svelte-flow__pane.dragging {
+  cursor: grabbing;
+}
+.sinkhole-flow .svelte-flow__node {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+/* lift a node above its neighbours while one of its dropdowns is open */
+.sinkhole-flow .svelte-flow__node:has(.sel.open),
+.sinkhole-flow .svelte-flow__node:hover {
+  z-index: 1000 !important;
+}
+.sinkhole-flow .svelte-flow__edge-wrapper {
+  overflow: visible;
+}
+.sinkhole-flow .svelte-flow__attribution {
+  display: none;
+}
+.sinkhole-flow .svelte-flow__minimap {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.07);
+  box-shadow: var(--shadow-card);
+  --xy-minimap-background-color: #18181b;
+  --xy-minimap-mask-background-color: rgb(17 17 19 / 0.72);
+  --xy-minimap-node-background-color: #2c2c32;
+  --xy-minimap-mask-stroke-color: rgb(255 255 255 / 0.18);
+}
+
+/* ---------- ports ---------- */
+.svelte-flow__handle.port-dot {
+  --c: #facc15;
+  width: 10px;
+  height: 10px;
+  min-width: 0;
+  min-height: 0;
+  border-radius: 99px;
+  border: 2px solid #1c1c1f;
+  background: var(--c);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c) 70%, transparent);
+  transition: transform 220ms var(--ease-spring);
+}
+.svelte-flow__handle.port-dot::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 99px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--c) 55%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+.svelte-flow__handle.port-dot.allow {
+  --c: #4ade80;
+}
+.svelte-flow__handle.port-dot.block {
+  --c: #f87171;
+}
+.svelte-flow__handle.port-dot.up {
+  --c: #60a5fa;
+}
+.svelte-flow__handle-left.port-dot {
+  transform: translate(-50%, -50%);
+}
+.svelte-flow__handle-right.port-dot {
+  transform: translate(50%, -50%);
+}
+.port-row:hover .svelte-flow__handle-left.port-dot {
+  transform: translate(-50%, -50%) scale(1.4);
+}
+.port-row:hover .svelte-flow__handle-right.port-dot {
+  transform: translate(50%, -50%) scale(1.4);
+}
+.port-row:hover .port-dot::after {
+  opacity: 1;
+}
+
+/* ---------- node internals ---------- */
+.node-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 6px 2px;
+  font-size: 11px;
+  color: var(--color-muted);
+}
+.node-foot .mono {
+  color: var(--color-soft);
+}
+.ctrl-row {
+  display: grid;
+  grid-template-columns: 1fr 148px;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+}
+.ctrl-row > .label {
+  white-space: nowrap;
+}
+.ctrl-row .sel,
+.ctrl-row .stepper {
+  width: 100%;
+}
+.divider {
+  height: 1px;
+  background: rgb(255 255 255 / 0.05);
+  margin: 8px 0;
+}

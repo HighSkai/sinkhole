@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Type & a11y check
+        run: npm run check
+      - name: Build
+        run: npm run build
+      - name: JS budget (< 120 KB gz)
+        run: npm run size
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sinkhole-dist
+          path: dist
+          retention-days: 14

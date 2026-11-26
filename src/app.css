@@ -1,0 +1,346 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ */
+/* Fonts — self-hosted woff2, Latin subset, 2 weights per family       */
+/* ------------------------------------------------------------------ */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('./assets/fonts/outfit-latin-300-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/outfit-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/jetbrains-mono-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/jetbrains-mono-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                       */
+/* ------------------------------------------------------------------ */
+@theme {
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --color-canvas: #111113;
+  --color-card: #1c1c1f;
+  --color-inset: #232327;
+  --color-pill: #2a2a2f;
+  --color-pill-hi: #34343a;
+  --color-dot: #2a2a2e;
+  --color-line: rgb(255 255 255 / 0.06);
+  --color-muted: #8a8a93;
+  --color-faint: #5d5d66;
+  --color-ink: #f4f4f6;
+  --color-soft: #c9c9d0;
+
+  --color-client: #facc15;
+  --color-allow: #4ade80;
+  --color-block: #f87171;
+  --color-up: #60a5fa;
+
+  --color-pink: #ff6b9d;
+  --color-violet: #8b5cf6;
+  --color-blue: #4da3ff;
+
+  --radius-card: 18px;
+  --radius-inset: 14px;
+  --radius-pill: 10px;
+
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 13px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+}
+
+:root {
+  --aurora-a: #ff6b9d;
+  --aurora-b: #8b5cf6;
+  --aurora-c: #4da3ff;
+  --shadow-card: 0 20px 40px rgb(0 0 0 / 0.5);
+  --shadow-card-hi: 0 28px 56px rgb(0 0 0 / 0.62);
+  color-scheme: dark;
+}
+[data-palette='ember'] {
+  --aurora-a: #ff8a5c;
+  --aurora-b: #f43f5e;
+  --aurora-c: #a855f7;
+}
+[data-palette='glacier'] {
+  --aurora-a: #22d3ee;
+  --aurora-b: #4da3ff;
+  --aurora-c: #6366f1;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+#app {
+  height: 100%;
+}
+
+::selection {
+  background: rgb(139 92 246 / 0.4);
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 1.5px solid rgb(255 255 255 / 0.55);
+  outline-offset: 2px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'zero' 0;
+}
+
+/* Scrollbars, tidy & dark */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2e2e34 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #2e2e34;
+  border-radius: 8px;
+}
+
+/* Static dot grid for non-canvas pages (matches the flow background) */
+.dot-grid {
+  background-color: var(--color-canvas);
+  background-image: radial-gradient(circle at 1px 1px, #2a2a2e 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Shared surfaces                                                     */
+/* ------------------------------------------------------------------ */
+.surface {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+.inset {
+  background: var(--color-inset);
+  border-radius: var(--radius-inset);
+}
+.glass {
+  background:
+    linear-gradient(120deg, rgb(139 92 246 / 0.1), rgb(255 107 157 / 0.07) 60%, rgb(77 163 255 / 0.06)),
+    rgb(24 24 28 / 0.72);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+}
+
+.label {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.01em;
+}
+
+/* Square icon buttons */
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  color: var(--color-soft);
+  background: transparent;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms var(--ease-out-soft);
+}
+.icon-btn:hover {
+  background: rgb(255 255 255 / 0.06);
+  color: var(--color-ink);
+}
+.icon-btn:active {
+  transform: scale(0.94);
+}
+.icon-btn[aria-pressed='true'] {
+  background: var(--color-ink);
+  color: #111113;
+}
+
+/* Pill buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 400;
+  white-space: nowrap;
+  transition:
+    background-color 160ms ease,
+    transform 160ms var(--ease-out-soft),
+    opacity 160ms ease;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-primary {
+  background: #f4f4f6;
+  color: #111113;
+}
+.btn-primary:hover {
+  background: #fff;
+}
+.btn-ghost {
+  background: var(--color-pill);
+  color: var(--color-ink);
+  border: 1px solid rgb(255 255 255 / 0.06);
+}
+.btn-ghost:hover {
+  background: var(--color-pill-hi);
+}
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Text inputs */
+.field {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-pill);
+  border: 1px solid rgb(255 255 255 / 0.04);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  outline: none;
+  transition: border-color 160ms ease;
+}
+.field::placeholder {
+  color: var(--color-faint);
+}
+.field:focus {
+  border-color: rgb(255 255 255 / 0.22);
+}
+
+/* Tooltips without browser chrome */
+[data-tip] {
+  position: relative;
+}
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  pointer-events: none;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 400;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #2a2a2f;
+  color: var(--color-ink);
+  border: 1px solid rgb(255 255 255 / 0.06);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.4);
+  opacity: 0;
+  transform: translateY(2px);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+  z-index: 60;
+  top: calc(100% + 8px);
+  left: 50%;
+  translate: -50% 0;
+}
+[data-tip-side='left']::after {
+  top: 50%;
+  left: auto;
+  right: calc(100% + 10px);
+  translate: 0 -50%;
+}
+[data-tip-side='top']::after {
+  top: auto;
+  bottom: calc(100% + 8px);
+}
+[data-tip]:hover::after,
+[data-tip]:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 350ms;
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion control                                                      */
+/* ------------------------------------------------------------------ */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+/* Animation toggle off / tab hidden: freeze decorative loops */
+.motion-off *,
+.motion-off *::before,
+.motion-off *::after {
+  animation-play-state: paused !important;
+}
+
+/* Reduced motion: each component swaps travel for opacity fades; these are the global bits. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .odo-strip {
+    transition: none !important;
+  }
+  .spin {
+    animation: none;
+  }
+}

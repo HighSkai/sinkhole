@@ -1,0 +1,144 @@
+<!doctype html>
+<!-- Source for docs/banner.png — render with:
+     npm run dev   then   node scripts/shoot.mjs http://localhost:5173/docs/banner.html docs/banner.png 1280 640 1500 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>sinkhole banner</title>
+    <style>
+      @font-face {
+        font-family: 'Outfit';
+        font-weight: 300;
+        src: url('/src/assets/fonts/outfit-latin-300-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Outfit';
+        font-weight: 400;
+        src: url('/src/assets/fonts/outfit-latin-400-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        font-weight: 400;
+        src: url('/src/assets/fonts/jetbrains-mono-latin-400-normal.woff2') format('woff2');
+      }
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1280px;
+        height: 640px;
+        overflow: hidden;
+        background: #111113;
+      }
+      .frame {
+        position: relative;
+        width: 1280px;
+        height: 640px;
+        overflow: hidden;
+        background-color: #111113;
+        background-image: radial-gradient(circle at 1px 1px, #26262b 1px, transparent 0);
+        background-size: 24px 24px;
+        font-family: 'Outfit', sans-serif;
+        color: #f4f4f6;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+      }
+      .b1 {
+        width: 760px;
+        height: 760px;
+        left: 40px;
+        top: -80px;
+        background: radial-gradient(closest-side, rgb(139 92 246 / 0.36), transparent);
+      }
+      .b2 {
+        width: 560px;
+        height: 560px;
+        left: 220px;
+        top: 160px;
+        background: radial-gradient(closest-side, rgb(255 107 157 / 0.28), transparent);
+      }
+      .b3 {
+        width: 620px;
+        height: 620px;
+        left: -120px;
+        top: 120px;
+        background: radial-gradient(closest-side, rgb(77 163 255 / 0.24), transparent);
+      }
+      .logo {
+        position: absolute;
+        left: 92px;
+        top: 150px;
+        width: 520px;
+      }
+      .text {
+        position: absolute;
+        left: 640px;
+        top: 168px;
+        width: 560px;
+      }
+      h1 {
+        font-weight: 300;
+        font-size: 128px;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      p {
+        margin-top: 22px;
+        font-size: 28px;
+        font-weight: 300;
+        line-height: 1.35;
+        color: #a3a3ad;
+      }
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 34px;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        height: 36px;
+        padding: 0 16px;
+        border-radius: 999px;
+        background: #1c1c1f;
+        border: 1px solid rgb(255 255 255 / 0.08);
+        font-size: 16px;
+        color: #c9c9d0;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 9px;
+      }
+      .mono {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frame">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <img class="logo" src="/docs/logo.svg" alt="" />
+      <div class="text">
+        <h1>sinkhole</h1>
+        <p>Network-wide DNS ad blocking,<br />visualised as a live node pipeline.</p>
+        <div class="pills">
+          <span class="pill"><span class="dot" style="background:#facc15"></span>clients</span>
+          <span class="pill"><span class="dot" style="background:#4ade80"></span>allowed</span>
+          <span class="pill"><span class="dot" style="background:#f87171"></span>blocked</span>
+          <span class="pill"><span class="dot" style="background:#60a5fa"></span>upstream</span>
+          <span class="pill mono">self-hosted · svelte 5 · &lt;120 KB</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
