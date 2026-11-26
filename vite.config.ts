@@ -44,9 +44,13 @@ function precompress(): Plugin {
  * needed right after — hint them so they download in parallel instead of in a waterfall.
  */
 function preloadDefaultRoute(): Plugin {
+  let base = '/';
   return {
     name: 'sinkhole:preload-default-route',
     apply: 'build',
+    configResolved(cfg) {
+      base = cfg.base;
+    },
     transformIndexHtml: {
       order: 'post',
       handler(_html, ctx) {
@@ -64,12 +68,12 @@ function preloadDefaultRoute(): Plugin {
         return [
           ...[...js].map((f) => ({
             tag: 'link',
-            attrs: { rel: 'modulepreload', crossorigin: '', href: '/' + f },
+            attrs: { rel: 'modulepreload', crossorigin: '', href: base + f },
             injectTo: 'head' as const
           })),
           ...[...css].map((f) => ({
             tag: 'link',
-            attrs: { rel: 'preload', as: 'style', crossorigin: '', href: '/' + f },
+            attrs: { rel: 'preload', as: 'style', crossorigin: '', href: base + f },
             injectTo: 'head' as const
           }))
         ];

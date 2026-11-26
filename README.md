@@ -8,8 +8,13 @@
 </p>
 
 <p align="center">
+  <a href="https://highskai.github.io/sinkhole/"><b>▶ Try the live demo</b></a> — runs entirely in your browser on mock data
+</p>
+
+<p align="center">
   <a href="https://github.com/HighSkai/sinkhole/releases"><img alt="Release" src="https://img.shields.io/github/v/release/HighSkai/sinkhole?style=flat-square&color=8b5cf6&label=release" /></a>
   <a href="https://github.com/HighSkai/sinkhole/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/HighSkai/sinkhole/ci.yml?branch=main&style=flat-square&label=ci" /></a>
+  <a href="https://highskai.github.io/sinkhole/"><img alt="Live demo" src="https://img.shields.io/github/actions/workflow/status/HighSkai/sinkhole/pages.yml?branch=main&style=flat-square&label=live%20demo&color=ff6b9d" /></a>
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-4da3ff?style=flat-square" /></a>
   <img alt="Svelte 5" src="https://img.shields.io/badge/svelte-5-ff3e00?style=flat-square&logo=svelte&logoColor=white" />
   <img alt="Vite 8" src="https://img.shields.io/badge/vite-8-646cff?style=flat-square&logo=vite&logoColor=white" />
@@ -18,6 +23,7 @@
 </p>
 
 <p align="center">
+  <a href="https://highskai.github.io/sinkhole/">Live demo</a> ·
   <a href="#features">Features</a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="#self-hosting">Self-hosting</a> ·
@@ -84,6 +90,7 @@ npm run dev          # http://localhost:5173 — runs against the mock resolver
 | `npm run dev` | Vite dev server with HMR |
 | `npm run build` | Production build → `dist/` (minified, hashed, `.br` + `.gz` precompressed) |
 | `npm run preview` | Serve the production build locally |
+| `npm run build:pages` | Build for a `/sinkhole/` subpath (what the GitHub Pages demo uses) |
 | `npm run check` | `svelte-check` (strict TypeScript + a11y) |
 | `npm run size` | Report gzip/brotli JS for the first paint and the default route; fails over budget |
 
@@ -103,6 +110,8 @@ docker run -d -p 8080:80 --name sinkhole sinkhole
 **nginx** — [`deploy/nginx.conf`](deploy/nginx.conf) does the same with `gzip_static` / `brotli_static` (the latter needs the `ngx_brotli` module).
 
 Both configs include a commented `/api` block for proxying the WebSocket of a real backend on the same origin.
+
+**Under a subpath** — build with `npx vite build --base /your/path/`. The [live demo](https://highskai.github.io/sinkhole/) is deployed this way by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on every push to `main`.
 
 ## Wiring a real DNS backend
 
