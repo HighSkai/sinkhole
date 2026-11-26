@@ -126,7 +126,15 @@
   $effect(() => {
     const ids = clientKey ? clientKey.split('|') : [];
     // let the Clients node render its new handles before wiring them up
-    requestAnimationFrame(() => (edges = makeEdges(ids)));
+    // (timer fallback in case rAF is throttled while the page is offscreen)
+    let done = false;
+    const wire = () => {
+      if (done) return;
+      done = true;
+      edges = makeEdges(ids);
+    };
+    requestAnimationFrame(wire);
+    setTimeout(wire, 100);
   });
 
   /* ---------- flow api for the shell toolbar ---------- */

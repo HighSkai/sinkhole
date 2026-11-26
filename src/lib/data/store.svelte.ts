@@ -161,8 +161,15 @@ class SinkholeStore {
   private schedule() {
     if (this.scheduled) return;
     this.scheduled = true;
-    if (typeof document !== 'undefined' && document.hidden) setTimeout(() => this.flush(), 250);
-    else requestAnimationFrame(() => this.flush());
+    const run = () => this.scheduled && this.flush();
+    if (typeof document !== 'undefined' && document.hidden) {
+      setTimeout(run, 250);
+    } else {
+      requestAnimationFrame(run);
+      // rAF can be throttled while the page still reports visible (offscreen iframes,
+      // background webviews) — make sure data keeps flowing anyway.
+      setTimeout(run, 150);
+    }
   }
 
   private flush() {
